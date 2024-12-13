@@ -25,11 +25,11 @@ l.place(x=80,y=20)
 image = Image.open("C:\\Users\\jones\\OneDrive\\Documents\\Home\\Project\\unnamed2.png") #Image
  
 # Resize the image using resize() method
-resize_image = image.resize((450, 250)) #Reszing the Image
+resize_image = image.resize((450, 250)) #Resizing the Image
  
 img = ImageTk.PhotoImage(resize_image)
  
-# create label for the image and resize set image
+# create label for the image
 label1 = Label(image=img)
 label1.image = img
 label1.pack()
@@ -102,7 +102,7 @@ def CurrencyConverter(): # Currency Program
 
 ###################################################################################################################################################################
 
-# Settign up the Temperature Converter
+# Setting up the Temperature Converter
 def TemperatureConverter():
     def convert():
         celTemp = celTempVar.get()
@@ -132,37 +132,37 @@ def TemperatureConverter():
     top = Toplevel() # Main window for Temperature Coverter
     top.title("Temperature Converter")
     ###MAIN###
-    celTempVar = IntVar() # Celcius Input box 
+    celTempVar = IntVar() 
     celTempVar.set(int(0)) 
-    fahTempVar = IntVar() # Fahreinheit Input box
+    fahTempVar = IntVar() 
     fahTempVar.set(int(0))
     titleLabel = Label (top, text = "Temperature Converter", font = ("Arial", 12, "bold"), justify = CENTER).grid(column=1,row=1)
-   
-
+    # Initialize Main Window for Temperature Converter
+    # Celcius's title
     celLabel = Label (top, text = "Celcius: ", font = ("Arial", 16), fg = "red")
     celLabel.grid(row = 2, column = 1, pady = 10, sticky = NW)
-
+    # Fahrenheit's title
     fahLabel = Label (top, text = "Fahrenheit: ", font = ("Arial", 16), fg = "blue")
     fahLabel.grid(row = 3, column = 1, pady = 10, sticky = NW)
-
+    #Celcius's Input box
     celEntry = Entry (top, width = 10, bd = 5, textvariable = celTempVar)
     celEntry.grid(row = 2, column = 1, pady = 10, sticky = NW, padx = 125 )
 
-
+    #Fahrenheit's Input box
     fahEntry = Entry (top, width = 10, bd = 5, textvariable = fahTempVar)
     fahEntry.grid(row = 3, column = 1, pady = 10, sticky = NW, padx = 125 )
-
+    # Convert Button  
     convertButton =Button (top, text = "Convert", font = ("Arial", 8, "bold"), relief = RAISED, bd=5, justify = CENTER, highlightbackground = "red", overrelief = GROOVE, activebackground = "green", activeforeground="blue", command = convert)
     convertButton.grid(row = 4, column = 1, ipady = 8, ipadx = 12, pady = 5, sticky = NW, padx = 55)
-
+    # Reset Button
     resetButton = Button (top, text = "Reset", font = ("Arial", 8, "bold"), relief = RAISED, bd=5, justify = CENTER, highlightbackground = "red", overrelief = GROOVE, activebackground = "green", activeforeground="blue", command = reset)
     resetButton.grid(row = 4, column = 2,ipady = 8, ipadx = 12, pady = 5, sticky = NW)
     
 
 ###################################################################################################################################################################################
 ####################################################################################################
-#TEMPERATURE CONVERTER
+# Main Window buttons
 widget = Button(root, text="Temperature converter", bg="white" , fg="red",font = ("Arial", 14, "bold"), relief = RAISED, bd=5, justify = CENTER, highlightbackground = "red", overrelief = GROOVE, activebackground = "green", activeforeground="blue", command=TemperatureConverter).place(x=50,y=120)
 widget = Button(root, text="Currency converter", bg="white" , fg="red",font = ("Arial", 14, "bold"), relief = RAISED, bd=5, justify = CENTER, highlightbackground = "red", overrelief = GROOVE, activebackground = "green", activeforeground="blue", command=CurrencyConverter).place(x=50,y=60)
-
+# Back to the start of the tool.
 root.mainloop()
