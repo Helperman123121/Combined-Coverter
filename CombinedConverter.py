@@ -13,39 +13,40 @@ import io
 import requests
 from io import BytesIO
 
-root = Tk()
-root.title('Combined CONVERTER')
-root.geometry("450x450+200+200")
-root.configure(bg='yellow')
-labelfont = ('ariel', 56, 'bold')
+# Initalize the Program 
+root = Tk() # Program
+root.title('Combined CONVERTER') # Program's Name
+root.geometry("450x450+200+200") # Window's size
+root.configure(bg='yellow') # Window's Color
+labelfont = ('ariel', 56, 'bold') # Title or Header 
 l=Label(root,text='Combined CONVERTER',font = ("Arial", 20, "italic"), justify = CENTER)
 l.place(x=80,y=20)
 
-image = Image.open("C:\\Users\\jones\\OneDrive\\Documents\\Home\\Project\\unnamed2.png")
+image = Image.open("C:\\Users\\jones\\OneDrive\\Documents\\Home\\Project\\unnamed2.png") #Image
  
 # Resize the image using resize() method
-resize_image = image.resize((450, 250))
+resize_image = image.resize((450, 250)) #Reszing the Image
  
 img = ImageTk.PhotoImage(resize_image)
  
-# create label and add resize image
+# create label for the image and resize set image
 label1 = Label(image=img)
 label1.image = img
 label1.pack()
-label1.place(x=0,y=200)
-
+label1.place(x=0,y=200) # Image Location
+# Making the Quit Button
 widget = Button(None, text="QUIT", bg="green", fg="red",font = ("Arial", 14, "bold"), relief = RAISED, bd=5, justify = CENTER, highlightbackground = "red", overrelief = GROOVE, activebackground = "green", activeforeground="blue", command=root.destroy).place(x=350,y=350)
 #############################################################################################################################################
 
-def CurrencyConverter():
-
+def CurrencyConverter(): # Currency Program
+    # Setting up the Currency IDS for the drop menu
     ids = {"US Dollar" : 'USD', "Euros" : 'EUR', "Indian Rupees" : 'INR', "Qatar Doha" : 'QAR', "Zimbwabe Harare" : 'ZWD', "Arab Emirates Dirham" : 'AED', "Pound Sterling" : 'GBP', "Japanese Yen" : 'JPY', "Yuan Renminbi" : 'CNY'}
 
-    def convert(amt, frm, to):
+    def convert(amt, frm, to): # Adding the Currency Website Pulls
             html =urllib.request.urlopen("https%3A%2F%2Fv6.exchangerate-api.com%2Fv6%2F8f826b06ba2bfd89f5950ed3%2Flatest%2FUSD" % (frm , to, amt))
-            return html.read().decode('utf-8')
+            return html.read().decode('utf-8') # Decoding the website to be translated and pulled from. 
 
-
+    # Settinng up the Drop menu and fill in box.
     def callback():
             try:
                 amt = float(in_field.get())
@@ -62,25 +63,25 @@ def CurrencyConverter():
                 out_amt.set(convert(amt, frm, to))
                             
 			
-			
+	# Initiazing the Currency Window		
     root = Toplevel()
     root.title("Currency Converter")
 
     # initiate frame
     mainframe = ttk.Frame(root, padding="3 3 12 12")
     mainframe.pack(fill=BOTH, expand=1)
-    titleLabel = Label (mainframe, text = "Currency Converter", font = ("Arial", 12, "bold"), justify = CENTER).grid(column=1,row=1)
-    in_amt = StringVar()
+    titleLabel = Label (mainframe, text = "Currency Converter", font = ("Arial", 12, "bold"), justify = CENTER).grid(column=1,row=1) # Subprogram title
+    in_amt = StringVar() # Currency Amount, IE: $2 for the top Box
     in_amt.set('0')
-    out_amt = StringVar()
+    out_amt = StringVar() # Currency Amount from the second box
 
-    in_unit = StringVar()
+    in_unit = StringVar() 
     out_unit = StringVar()
-    in_unit.set('Select Unit')
-    out_unit.set('Select Unit')
+    in_unit.set('Select Unit') # Selecting the Currency, IE: Dollars, Euros, Pounds. Top drop menu
+    out_unit.set('Select Unit') # Selecting the Currency from the bottom menu
 
     # Add input field
-    in_field = ttk.Entry(mainframe, width=20, textvariable=in_amt)
+    in_field = ttk.Entry(mainframe, width=20, textvariable=in_amt) # The Actually box
     in_field.grid(row=1, column=2, sticky=(W, E))
 
     # Add drop-down for input unit
@@ -91,7 +92,7 @@ def CurrencyConverter():
     # Add output field and drop-down
     ttk.Entry(mainframe, textvariable=out_amt, state="readonly").grid(column=2, row=3, sticky=(W, E))
     in_select = OptionMenu(mainframe, out_unit, "US Dollar", "Euros", "Indian Rupees", "Qatar Doha", "Zimbwabe Harare", "Arab Emirates Dirham", "Pound Sterling", "Japanese Yen", "Yuan Renminbi").grid(column=3, row=3, sticky=W)
-
+    # Calculate Button
     calc_button = ttk.Button(mainframe, text="Calculate",command=callback).grid(column=2, row=2, sticky=E)
 
     for child in mainframe.winfo_children(): child.grid_configure(padx=5, pady=5)
@@ -101,14 +102,14 @@ def CurrencyConverter():
 
 ###################################################################################################################################################################
 
-
+# Settign up the Temperature Converter
 def TemperatureConverter():
     def convert():
         celTemp = celTempVar.get()
         fahTemp = fahTempVar.get()
 
 
-
+        # Temperature coversation.
         if celTempVar.get() != 0.0:
             celToFah = (celTemp *  9/5 + 32)
             fahTempVar.set(celToFah)
@@ -116,24 +117,24 @@ def TemperatureConverter():
         elif fahTempVar.get() != 0.0:
             fahToCel = ((fahTemp - 32) * (5/9))
             celTempVar.set(fahToCel)
-
+    # Reset Buttom Initalizion
     def reset():
-        top = Toplevel(padx=50, pady=50)
+        top = Toplevel(padx=50, pady=50) # The "OK" Window.
         top.grid()
-        message = Label(top, text = "Reset Complete")
-        button = Button(top, text="OK", command=top.destroy)
+        message = Label(top, text = "Reset Complete") # "OK" Window's title
+        button = Button(top, text="OK", command=top.destroy) # Tieing the button to the close out
 
         message.grid(row = 0, padx = 5, pady = 5)
         button.grid(row = 1, ipadx = 10, ipady = 10, padx = 5, pady = 5)
 
         fahTempVar.set(int(0))
         celTempVar.set(int(0)) 
-    top = Toplevel()
+    top = Toplevel() # Main window for Temperature Coverter
     top.title("Temperature Converter")
     ###MAIN###
-    celTempVar = IntVar()
-    celTempVar.set(int(0))
-    fahTempVar = IntVar()
+    celTempVar = IntVar() # Celcius Input box 
+    celTempVar.set(int(0)) 
+    fahTempVar = IntVar() # Fahreinheit Input box
     fahTempVar.set(int(0))
     titleLabel = Label (top, text = "Temperature Converter", font = ("Arial", 12, "bold"), justify = CENTER).grid(column=1,row=1)
    

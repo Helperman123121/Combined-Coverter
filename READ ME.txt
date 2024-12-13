@@ -1,0 +1,17 @@
+Greetings! Below is necessary steps and information in how to use the "Combined Converter".
+
+Step 1: Go to the most recent updated GITHUB page which is here: https://github.com/Helperman123121/Combined-Coverter
+
+Step 2: Go to Code, and click on "Download as Zip".
+
+Step 3: Extract the file anywhere.(Note: you may have edited the .py file and change the image directory for "unnamed2.png")
+
+Step 4: Run the file through either visual code or PyCharm.
+
+Step 5: Congratulations! You have successful load into the software, you have three option at start: Go to the Currency or Temperature Converter and/or click "Quit" button to the end the program.
+
+Step 5A(Currency Converter): This step is only for the Currency Converter, if you don't wish to use it, you can skip this step. Upon opening the subprogram, you will have two drop down menu that will allow you to convert different currency and once you selected the currency you want,  click the button "Convert". This will convert the currency from top to button meaning, if you select Euro on the first drop menu and US dollars on the second, it will convert it to Euros.
+
+Step 6A(Temperature Converter): This step is only for the Temperature Converter, if you do not wish to this, then you can skip. Upon opening the subprogram, you will two fill boxes one for Celcuis, another for Fahreinheit and convert button that convert the twos, last the reset button clears the input. Note: You will get another pop up, just clicking "ok" will close the pop up.
+
+Step 7: Once done using both subprograms, you can either click the "Quit" button or the "X" button.
