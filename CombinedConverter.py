@@ -12,6 +12,7 @@ from tkinter import PhotoImage
 import io
 import requests
 from io import BytesIO
+import json
 
 # Initalize the Program 
 root = Tk() # Program
@@ -40,11 +41,20 @@ widget = Button(None, text="QUIT", bg="green", fg="red",font = ("Arial", 14, "bo
 
 def CurrencyConverter(): # Currency Program
     # Setting up the Currency IDS for the drop menu
-    ids = {"US Dollar" : 'USD', "Euros" : 'EUR', "Indian Rupees" : 'INR', "Qatar Doha" : 'QAR', "Zimbwabe Harare" : 'ZWD', "Arab Emirates Dirham" : 'AED', "Pound Sterling" : 'GBP', "Japanese Yen" : 'JPY', "Yuan Renminbi" : 'CNY'}
+    ids = {"US Dollar" : 'USD', "Euros" : 'EUR', "Indian Rupees" : 'INR', "Qatar Doha" : 'QAR', "Zimbabwe Dollar" : 'ZWL', "Arab Emirates Dirham" : 'AED', "Pound Sterling" : 'GBP', "Japanese Yen" : 'JPY', "Yuan Renminbi" : 'CNY'}
 
     def convert(amt, frm, to): # Adding the Currency Website Pulls
-            html =urllib.request.urlopen("https%3A%2F%2Fv6.exchangerate-api.com%2Fv6%2F8f826b06ba2bfd89f5950ed3%2Flatest%2FUSD" % (frm , to, amt))
-            return html.read().decode('utf-8') # Decoding the website to be translated and pulled from. 
+    # Setting up the Currency IDS for the drop menu
+        ids = {"US Dollar" : 'USD', "Euros" : 'EUR', "Indian Rupees" : 'INR', "Qatar Doha" : 'QAR', "Zimbabwe Dollar" : 'ZWL', "Arab Emirates Dirham" : 'AED', "Pound Sterling" : 'GBP', "Japanese Yen" : 'JPY', "Yuan Renminbi" : 'CNY'}
+    Api_URL = "https://v6.exchangerate-api.com/v6/8f826b06ba2bfd89f5950ed3/latest/"
+    def convert(amt, frm, to): # Adding the Currency Website Pulls
+            Request = Api_URL + frm # Combine the base URL + From Currency rate
+            html = urllib.request.urlopen(Request) #Requests the website with the base URL and From currency rate country ID
+            data = json.loads(html.read().decode('utf-8')) # Decoding the website to be translated and pulled from. 
+            CR = data['conversion_rates'] # Grab the rates from the json
+            rate = CR[to] #Get the 'To' currency rate
+            CA = amt * rate # Converted Rate
+            return CA
 
     # Settinng up the Drop menu and fill in box.
     def callback():
@@ -85,13 +95,13 @@ def CurrencyConverter(): # Currency Program
     in_field.grid(row=1, column=2, sticky=(W, E))
 
     # Add drop-down for input unit
-    in_select = OptionMenu(mainframe, in_unit, "US Dollar", "Euros", "Indian Rupees", "Qatar Doha", "Zimbwabe Harare", "Arab Emirates Dirham", "Pound Sterling", "Japanese Yen", "Yuan Renminbi").grid(column=3, row=1, sticky=W)
+    in_select = OptionMenu(mainframe, in_unit, "US Dollar", "Euros", "Indian Rupees", "Qatar Doha", "Zimbabwe Dollar", "Arab Emirates Dirham", "Pound Sterling", "Japanese Yen", "Yuan Renminbi").grid(column=3, row=1, sticky=W)
 
 
 
     # Add output field and drop-down
     ttk.Entry(mainframe, textvariable=out_amt, state="readonly").grid(column=2, row=3, sticky=(W, E))
-    in_select = OptionMenu(mainframe, out_unit, "US Dollar", "Euros", "Indian Rupees", "Qatar Doha", "Zimbwabe Harare", "Arab Emirates Dirham", "Pound Sterling", "Japanese Yen", "Yuan Renminbi").grid(column=3, row=3, sticky=W)
+    in_select = OptionMenu(mainframe, out_unit, "US Dollar", "Euros", "Indian Rupees", "Qatar Doha", "Zimbabwe Dollar", "Arab Emirates Dirham", "Pound Sterling", "Japanese Yen", "Yuan Renminbi").grid(column=3, row=3, sticky=W)
     # Calculate Button
     calc_button = ttk.Button(mainframe, text="Calculate",command=callback).grid(column=2, row=2, sticky=E)
 
