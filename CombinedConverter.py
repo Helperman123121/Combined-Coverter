@@ -21,7 +21,7 @@ labelfont = ('ariel', 56, 'bold')
 l=Label(root,text='Combined CONVERTER',font = ("Arial", 20, "italic"), justify = CENTER)
 l.place(x=80,y=20)
 
-image = Image.open("C:\\Users\\jones\\OneDrive\\Documents\\Home\\Project Progress\\unnamed2.png")
+image = Image.open("C:\\Users\\jones\\OneDrive\\Documents\\Home\\Project\\unnamed2.png")
  
 # Resize the image using resize() method
 resize_image = image.resize((450, 250))
